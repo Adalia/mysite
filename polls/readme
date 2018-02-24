@@ -1,0 +1,5 @@
+F()
+原生模板
+url的使用
+objects是modelsManager里面带的，可以集成此类自己编写操作数据库的各种方法
+choice_set: 是modlesManager针对含有外键的模型的方法

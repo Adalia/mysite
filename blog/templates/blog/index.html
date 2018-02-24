@@ -1,0 +1,62 @@
+{% extends 'base.html' %}  <!--必须放在第一行 -->
+
+
+{% block main %}
+{% for blog in blog_list %}
+    <article class="post post-{{post.pk}}">
+        <header class="entry-header">
+            <h1 class="entry-title">
+                <a href="{% url 'blog:detail' blog.id%}">{{blog.title}}</a>
+            </h1>
+            <div class="entry-meta">
+                <span class="post-category"><a href="#">{{ blog.category.name }}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date"
+                                                          datetime="2012-11-09T23:15:57+00:00">{{ blog.created_time }}</time></a></span>
+                <span class="post-author"><a href="#">blog.author</a></span>
+                <!--html锚点设置 -->
+                <span class="comments-link"><a href="{% url 'blog:detail' blog.id %}#comment">{{ blog.comment_set.count}} 评论</a></span>  <!-- comment_set 为一对多关系中自带的属性。blog是choice的外键，关联到blog模型 -->
+                <span class="views-count"><a href="#">{{ blog.views }} 阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+            <p>{{ blog.excerpt }}</p>
+            <div class="read-more cl-effect-14">
+                <a href="{% url 'blog:detail' blog.id %}" class="more-link">more <span class="meta-nav">→</span></a>
+            </div>
+        </div>
+ </article>
+{% empty %}
+    <div class="no-post">暂时还没有发布的文章！</div>
+{% endfor %}
+<div class= "center">
+    {% if is_paginated %}
+    <div class="pagination">
+      {% if first %}
+        <a href="?page=1">1</a>
+      {% endif %}
+      {% if left %}
+        {% if left_has_more %}
+            <span>...</span>
+        {% endif %}
+        {% for i in left %}
+            <a href="?page={{ i }}">{{ i }}</a>
+        {% endfor %}
+      {% endif %}
+      <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
+      {% if right %}
+        {% for i in right %}
+            <a href="?page={{ i }}">{{ i }}</a>
+        {% endfor %}
+        {% if right_has_more %}
+            <span>...</span>
+        {% endif %}
+      {% endif %}
+      {% if last %}
+        <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+      {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+{% endblock main %}
+
