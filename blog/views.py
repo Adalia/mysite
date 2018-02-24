@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from .forms import CommentForm
 from blog import common_tools
 
-# 基于 通用视图
+# 基于通用视图
 class IndexView(ListView):
     model = Blog
     template_name = 'blog/index.html'
