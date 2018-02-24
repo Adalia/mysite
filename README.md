@@ -1,5 +1,5 @@
 # mysite
-参考j教程：https://www.zmrenwu.com/post/2/
+参考教程：https://www.zmrenwu.com/post/2/
 
 环境准备：
 
@@ -21,13 +21,42 @@
 
 创建：```django-admin.py startapp appname```，例：blog
 
-配置app： mysite\mysite\setting.py 的INSTALLED_APPS项中添加app： INSTALLED_APPS = [ 'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', 'blog', ]
+配置app： ```mysite\mysite\setting.py`` 的INSTALLED_APPS项中添加app： 
+```
+INSTALLED_APPS = [ 
+   'django.contrib.admin', 
+   'django.contrib.auth', 
+   'django.contrib.contenttypes', 
+   'django.contrib.sessions', 
+   'django.contrib.messages', 
+   'django.contrib.staticfiles', 
+   'blog', 
+]
+```
 
-创建数据库： 安装mysql，安装server端就行，可视化界面可以选择navicate，连接之前需要授权 创建一个数据库，例：mysite python manage.py migrate
+创建数据库： 安装mysql，安装server端就行，可视化界面可以选择navicate，连接之前需要授权 创建一个数据库，例：```mysite python manage.py migrate```
 
-配置数据库： mysite\mysite\setting.py 中修改DATABASES配置为： DATABASES = { 'default': { 'ENGINE': 'django.db.backends.mysql', 'NAME': 'mysite', 'USER': 'root', 'PASSWORD': 'root', 'HOST': '127.0.0.1', 'PORT': '3306', 'OPTIONS': { 'autocommit': True, }, }, } mysite\mysite_init_.py 中添加： import pymysql pymysql.install_as_MySQLdb()
+配置数据库： ```mysite\mysite\setting.py ```中修改DATABASES配置为： 
+```
+DATABASES = { 
+  'default': { 
+     'ENGINE': 'django.db.backends.mysql', 
+     'NAME': 'mysite', 
+     'USER': 'root', 
+     'PASSWORD': 'root', 
+     'HOST': '127.0.0.1', 
+     'PORT':  '3306', 
+     'OPTIONS': { 'autocommit': True, }, 
+     }, 
+    }
+'''
 
-模板配置：	建立一个放置模板（html）的目录-templates，目录级别：mysite\templates，与setting.py同级 配置模板路径：setting.py 的TEMPLATES项中的DIRS对应的values改为[BASE_DIR+"/templates"]
+```mysite\mysite_init_.py``` 中添加： ```import pymysql pymysql.install_as_MySQLdb()```
+
+
+模板配置：	
+
+建立一个放置模板（html）的目录-templates，目录级别：mysite\templates，与setting.py同级 配置模板路径：setting.py 的TEMPLATES项中的DIRS对应的values改为[BASE_DIR+"/templates"]
 
 url配置： 1.在项目中配置app的主路径：D:\code\mysite\mysite\urls.oy中配置path('blog/', include('blog.urls'), name="blog")；2.在app的urls.py中（D:\code\mysite\blog\urls.py）中配置具体目录。
 
